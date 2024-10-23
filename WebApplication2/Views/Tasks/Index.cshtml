@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Entity.Task>
+
+@{
+    ViewData["Title"] = "Tasks List";
+}
+
+<h2>Tasks List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>タスクID</th>
+            <th>ユーザー</th>
+            <th>タイトル</th>
+            <th>説明</th>
+            <th>完了</th>
+            <th>期限</th>
+            <th>作成日時</th>
+            <th>更新日時</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Id</td>
+                <td>@task.User?.Username</td>
+                <td>@task.Title</td>
+                <td>@task.Description</td>
+                <td>@task.IsCompleted</td>
+                <td>@task.DueDate?.ToString("yyyy-MM-dd")</td>
+                <td>@task.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>@task.UpdatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>
