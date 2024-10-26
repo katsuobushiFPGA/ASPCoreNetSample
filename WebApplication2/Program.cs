@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Context;
+using WebApplication2.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("PostgreSqlConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
+
+// for Dapper DIƒRƒ“ƒeƒi‚Ö‚Ì“o˜^
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

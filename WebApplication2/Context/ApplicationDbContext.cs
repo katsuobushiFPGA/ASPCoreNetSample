@@ -1,5 +1,5 @@
-﻿using Entity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace Context
 {
@@ -7,9 +7,22 @@ namespace Context
     {
         public DbSet<Entity.User> Users { get; set; }
         public DbSet<Entity.Task> Tasks { get; set; }
+        private IDbConnection _connection;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+        public IDbConnection Connection
+        {
+            get
+            {
+                if (_connection == null)
+                {
+                    _connection = Database.GetDbConnection();
+                }
+                return _connection;
+            }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
